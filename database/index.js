@@ -10,7 +10,30 @@ let acountSchema = mongoose.Schema({
   password: String,
 });
 
-let account = mongoose.model('Account', acountSchema);
+let Account = mongoose.model('Account', acountSchema);
 
-module.exports.saveacount = saveacount;
-module.exports.getAccount = getAccount;
+const creatAccount = (info) => {
+  info = JSON.parse(info.body)
+  for (var i = 0; i < info.length; i++) {
+    var info = {
+      name: info[i].name,
+      email: info[i].email,
+      password: info[i].password,
+
+
+    }
+    var newAccount = new Account(info)
+    newAccount.save()
+      .then(item => {
+        console.log("item saved to database", item);
+      })
+      .catch(err => {
+        console.log("unable to save to database", err);
+      });
+
+  }
+
+}
+
+module.exports.creatAccount = creatAccount;
+// module.exports.getAccount = getAccount;

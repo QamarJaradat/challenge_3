@@ -4,6 +4,11 @@ var server = express()
 
 server.use(express.static(__dirname + '/public'));
 
-server.listen(3000)
+
+server.post('/account', (req, res) => {
+
+})
+
+server.listen(3001)
 console.log("Server Listening on 3000!")
 
